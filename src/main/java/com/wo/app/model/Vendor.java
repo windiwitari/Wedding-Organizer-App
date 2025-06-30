@@ -4,6 +4,7 @@
  */
 package com.wo.app.model;
 
+
 import org.bson.types.ObjectId;
 
 /**
@@ -19,6 +20,7 @@ public class Vendor {
     private String noTelepon;
     private String email;
     private String deskripsiPaket; // Untuk deskripsi dan harga
+
 
     // Getters and Setters
     public ObjectId getId() {
@@ -76,5 +78,7 @@ public class Vendor {
     public void setDeskripsiPaket(String deskripsiPaket) {
         this.deskripsiPaket = deskripsiPaket;
     }
+
+
 
 }

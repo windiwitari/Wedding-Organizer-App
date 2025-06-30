@@ -29,22 +29,22 @@ public class VendorDao {
 
     private Document vendorToDocument(Vendor vendor) {
         return new Document("namaVendor", vendor.getNamaVendor())
-                .append("kategori", vendor.getKategori())
-                .append("kontakPerson", vendor.getKontakPerson())
                 .append("noTelepon", vendor.getNoTelepon())
                 .append("email", vendor.getEmail())
                 .append("deskripsiPaket", vendor.getDeskripsiPaket());
+        
     }
 
     private Vendor documentToVendor(Document doc) {
         Vendor vendor = new Vendor();
         vendor.setId(doc.getObjectId("_id"));
         vendor.setNamaVendor(doc.getString("namaVendor"));
-        vendor.setKategori(doc.getString("kategori"));
-        vendor.setKontakPerson(doc.getString("kontakPerson"));
         vendor.setNoTelepon(doc.getString("noTelepon"));
         vendor.setEmail(doc.getString("email"));
         vendor.setDeskripsiPaket(doc.getString("deskripsiPaket"));
+        
+        // ----------------------------------------------------
+        
         return vendor;
     }
 
