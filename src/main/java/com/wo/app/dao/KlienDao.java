@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.wo.app.dao;
 
 import com.mongodb.client.MongoCollection;
@@ -46,6 +42,10 @@ public class KlienDao {
 
     // Method untuk mengubah Document MongoDB menjadi Objek Klien
     private Klien documentToKlien(Document doc) {
+        // Tambahan: Pemeriksaan null untuk mencegah error
+        if (doc == null) {
+            return null;
+        }
         Klien klien = new Klien();
         klien.setId(doc.getObjectId("_id"));
         klien.setNamaLengkap(doc.getString("namaLengkap"));
@@ -75,6 +75,28 @@ public class KlienDao {
         }
         return klienList;
     }
+
+    // ==========================================================
+    // == KODE TAMBAHAN ADA DI SINI ==
+    // ==========================================================
+    /**
+     * Mencari satu klien di database berdasarkan ID uniknya.
+     * @param id ObjectId dari klien yang akan dicari.
+     * @return Objek Klien jika ditemukan, null jika tidak.
+     */
+    public Klien findById(ObjectId id) {
+        // Membuat filter untuk mencari dokumen dengan _id yang cocok
+        Bson filter = Filters.eq("_id", id);
+        
+        // Menjalankan pencarian dan mengambil dokumen pertama yang ditemukan
+        Document doc = collection.find(filter).first();
+        
+        // Mengubah dokumen menjadi objek Klien dan mengembalikannya
+        return documentToKlien(doc);
+    }
+    // ==========================================================
+    // == AKHIR DARI KODE TAMBAHAN ==
+    // ==========================================================
 
     // UPDATE
     public boolean update(Klien klien) {

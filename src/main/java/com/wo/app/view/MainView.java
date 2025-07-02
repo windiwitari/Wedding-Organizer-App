@@ -81,19 +81,32 @@ public class MainView extends javax.swing.JFrame {
 
     private void loadKlienData() {
         DefaultTableModel model = (DefaultTableModel) tabelKlien.getModel();
-        model.setRowCount(0);
+        model.setRowCount(0); // Kosongkan tabel sebelum diisi
+
         List<Klien> klienList = klienDao.findAll();
         for (Klien klien : klienList) {
+            // INI BAGIAN YANG DIPERBAIKI:
+            // Sekarang kita memasukkan semua data ke dalam setiap baris
+            // sesuai urutan kolom di tabel Anda.
             model.addRow(new Object[]{
-                klien.getId(), klien.getNamaLengkap(), klien.getEmail(),
-                klien.getTanggalPernikahan(), klien.getLokasi()
+                klien.getId(),              // Kolom 0 (disembunyikan)
+                klien.getNamaLengkap(),     // Kolom 1 (Nama)
+                klien.getNoTelepon(),       // Kolom 2 (Telepon)
+                klien.getEmail(),           // Kolom 3 (Email)
+                klien.getLokasi(),          // Kolom 4 (Lokasi)
+                klien.getJumlahTamu(),      // Kolom 5 (Jumlah Tamu)
+                klien.getTanggalPernikahan()// Kolom 6 (Tanggal)
             });
         }
+        
+        // Sembunyikan kolom ID (kolom ke-0) agar tidak terlihat oleh pengguna
         if (tabelKlien.getColumnCount() > 0) {
             tabelKlien.getColumnModel().getColumn(0).setMinWidth(0);
             tabelKlien.getColumnModel().getColumn(0).setMaxWidth(0);
+            tabelKlien.getColumnModel().getColumn(0).setWidth(0);
         }
     }
+
 
     private void resetForm() {
         txtNama.setText("");
@@ -113,18 +126,28 @@ public class MainView extends javax.swing.JFrame {
     // == BAGIAN KODE UNTUK MANAJEMEN VENDOR
     // =========================================================================
 
-    private void loadVendorData() {
+     private void loadVendorData() {
         DefaultTableModel model = (DefaultTableModel) tabelVendor.getModel();
-        model.setRowCount(0);
+        model.setRowCount(0); // Kosongkan tabel sebelum diisi
+
         List<Vendor> vendorList = vendorDao.findAll();
         for (Vendor vendor : vendorList) {
+            // INI BAGIAN YANG DIPERBAIKI:
+            // Sekarang kita memasukkan semua data ke dalam setiap baris.
             model.addRow(new Object[]{
-                vendor.getId(), vendor.getNamaVendor(), vendor.getKategori(), vendor.getKontakPerson()
+                vendor.getId(),             // Kolom 0 (disembunyikan)
+                vendor.getNamaVendor(),     // Kolom 1 (Nama Vendor)
+                vendor.getNoTelepon(),      // Kolom 2 (Telepon)
+                vendor.getEmail(),          // Kolom 3 (Email)
+                vendor.getDeskripsiPaket()  // Kolom 4 (Keterangan)
             });
         }
+        
+        // Sembunyikan kolom ID (kolom ke-0) agar tidak terlihat oleh pengguna
         if (tabelVendor.getColumnCount() > 0) {
             tabelVendor.getColumnModel().getColumn(0).setMinWidth(0);
             tabelVendor.getColumnModel().getColumn(0).setMaxWidth(0);
+            tabelVendor.getColumnModel().getColumn(0).setWidth(0);
         }
     }
 
@@ -156,21 +179,33 @@ public class MainView extends javax.swing.JFrame {
 
     private void loadTugasData(ObjectId clientId) {
         DefaultTableModel model = (DefaultTableModel) tabelTugas.getModel();
-        model.setRowCount(0);
+        model.setRowCount(0); // Selalu kosongkan tabel terlebih dahulu
+
+        // Hanya jalankan pencarian jika clientId tidak null
         if (clientId != null) {
+            // Panggil DAO untuk mencari semua tugas yang memiliki 'idKlien' yang cocok
             List<Tugas> tugasList = tugasDao.findByClientId(clientId);
+            
+            // Masukkan setiap tugas yang ditemukan sebagai baris baru di tabel
             for (Tugas tugas : tugasList) {
                 model.addRow(new Object[]{
-                    tugas.getId(), tugas.getNamaTugas(), tugas.getTenggatWaktu(),
-                    tugas.getStatus(), tugas.getPenanggungJawab()
+                    tugas.getId(),              // Kolom 0 (disembunyikan)
+                    tugas.getNamaTugas(),       // Kolom 1
+                    tugas.getTenggatWaktu(),    // Kolom 2
+                    tugas.getStatus(),          // Kolom 3
+                    tugas.getPenanggungJawab()  // Kolom 4
                 });
             }
         }
+        
+        // Sembunyikan kolom ID
         if (tabelTugas.getColumnCount() > 0) {
             tabelTugas.getColumnModel().getColumn(0).setMinWidth(0);
             tabelTugas.getColumnModel().getColumn(0).setMaxWidth(0);
+            tabelTugas.getColumnModel().getColumn(0).setWidth(0);
         }
     }
+
 
     private void resetFormTugas() {
         txtNamaTugas.setText("");
@@ -213,6 +248,7 @@ public class MainView extends javax.swing.JFrame {
         txtNama = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
+        jLabel10 = new javax.swing.JLabel();
         Vendor = new javax.swing.JPanel();
         txtTeleponVendor = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -229,6 +265,7 @@ public class MainView extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelVendor = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         comboKlienTugas = new javax.swing.JComboBox<>();
@@ -243,8 +280,13 @@ public class MainView extends javax.swing.JFrame {
         btnHapusTugas = new javax.swing.JButton();
         btnTandaiSelesai = new javax.swing.JButton();
         dateTenggatWaktu = new com.toedter.calendar.JDateChooser();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        Klien.setBackground(new java.awt.Color(255, 153, 153));
 
         btnSimpan.setText("Simpan");
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -276,13 +318,16 @@ public class MainView extends javax.swing.JFrame {
 
         tabelKlien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nama ", "Telepon", "Email", "Lokasi", "Jumlah tamu", "Tanggal "
             }
         ));
         tabelKlien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -303,6 +348,11 @@ public class MainView extends javax.swing.JFrame {
         jLabel5.setText("Tanggal");
 
         jLabel6.setText("Jumlah Tamu");
+
+        jLabel10.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("KLIEN ");
 
         javax.swing.GroupLayout KlienLayout = new javax.swing.GroupLayout(Klien);
         Klien.setLayout(KlienLayout);
@@ -338,25 +388,29 @@ public class MainView extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnUpdate)
                         .addGap(35, 35, 35)))
-                .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(KlienLayout.createSequentialGroup()
-                        .addComponent(btnSimpan)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnHapus)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBaru))
-                    .addComponent(dateChooserTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-                    .addComponent(spinnerTamu)
-                    .addComponent(txtLokasi)
-                    .addComponent(txtEmail)
-                    .addComponent(txtTelepon)
-                    .addComponent(txtNama))
+                .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(KlienLayout.createSequentialGroup()
+                            .addComponent(btnSimpan)
+                            .addGap(26, 26, 26)
+                            .addComponent(btnHapus)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnBaru))
+                        .addComponent(dateChooserTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                        .addComponent(spinnerTamu)
+                        .addComponent(txtLokasi)
+                        .addComponent(txtEmail)
+                        .addComponent(txtTelepon)
+                        .addComponent(txtNama)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         KlienLayout.setVerticalGroup(
             KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, KlienLayout.createSequentialGroup()
-                .addGap(92, 92, 92)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel10)
+                .addGap(42, 42, 42)
                 .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -380,7 +434,7 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(dateChooserTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSimpan)
                     .addComponent(btnBaru)
@@ -395,11 +449,13 @@ public class MainView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Manajemen Klien", Klien);
 
+        Vendor.setBackground(new java.awt.Color(153, 153, 255));
+
         jLabel7.setText("Email");
 
         jLabel8.setText("Telepon");
 
-        jLabel9.setText("Lokasi");
+        jLabel9.setText("Keterangan");
 
         btnSimpanVendor.setText("Simpan");
         btnSimpanVendor.addActionListener(new java.awt.event.ActionListener() {
@@ -431,13 +487,17 @@ public class MainView extends javax.swing.JFrame {
 
         tabelVendor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nama Vendor", "Telepon", "Email", "Keterangan"
             }
         ));
         tabelVendor.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -448,6 +508,10 @@ public class MainView extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tabelVendor);
 
         jLabel12.setText("Nama");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("VENDOR");
 
         javax.swing.GroupLayout VendorLayout = new javax.swing.GroupLayout(Vendor);
         Vendor.setLayout(VendorLayout);
@@ -492,11 +556,17 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(txtTeleponVendor)
                     .addComponent(txtNamaVendor))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(VendorLayout.createSequentialGroup()
+                .addGap(245, 245, 245)
+                .addComponent(jLabel11)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         VendorLayout.setVerticalGroup(
             VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VendorLayout.createSequentialGroup()
-                .addGap(92, 92, 92)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel11)
+                .addGap(41, 41, 41)
                 .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txtNamaVendor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -512,7 +582,7 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9)
                     .addComponent(txtAreaDeskripsi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                 .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSimpanVendor)
                     .addComponent(btnBaru1)
@@ -527,19 +597,32 @@ public class MainView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Manajemen Vendor", Vendor);
 
+        jPanel4.setBackground(new java.awt.Color(255, 204, 102));
+
         jLabel13.setText("Pilih Klien");
+
+        comboKlienTugas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboKlienTugasActionPerformed(evt);
+            }
+        });
 
         tabelTugas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nama Tugas", "Tenggat", "Status", "Penanggungjawab"
             }
         ));
+        tabelTugas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelTugasMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tabelTugas);
 
         jLabel14.setText("Nama Tugas");
@@ -575,6 +658,10 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("TUGAS");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -589,10 +676,6 @@ public class MainView extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboKlienTugas, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
                                     .addComponent(jLabel15)
@@ -605,13 +688,21 @@ public class MainView extends javax.swing.JFrame {
                                         .addComponent(btnTandaiSelesai))
                                     .addComponent(txtNamaTugas)
                                     .addComponent(txtPenanggungJawab)
-                                    .addComponent(dateTenggatWaktu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(dateTenggatWaktu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17)
+                                    .addComponent(comboKlienTugas, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(74, 74, 74))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel17)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(comboKlienTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -634,7 +725,7 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(btnSimpanTugas)
                     .addComponent(btnHapusTugas)
                     .addComponent(btnTandaiSelesai))
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Manajemen Tugas", jPanel4);
@@ -744,31 +835,70 @@ public class MainView extends javax.swing.JFrame {
 
     private void tabelKlienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelKlienMouseClicked
         // TODO add your handling code here:
-    int selectedRow = tabelKlien.getSelectedRow();
+     int selectedRow = tabelKlien.getSelectedRow();
         if (selectedRow != -1) {
+            // 1. Ambil ID dari kolom pertama tabel
             selectedKlienId = (ObjectId) tabelKlien.getValueAt(selectedRow, 0);
-            txtNama.setText(tabelKlien.getValueAt(selectedRow, 1).toString());
-            txtEmail.setText(tabelKlien.getValueAt(selectedRow, 2).toString());
-            LocalDate tanggal = (LocalDate) tabelKlien.getValueAt(selectedRow, 3);
-            dateChooserTanggal.setDate(Date.from(tanggal.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            txtLokasi.setText(tabelKlien.getValueAt(selectedRow, 4).toString());
-            btnSimpan.setEnabled(false);
-            btnUpdate.setEnabled(true);
-            btnHapus.setEnabled(true);
-        }   
+
+            // 2. Gunakan ID untuk mengambil data LENGKAP klien dari database
+            //    Pastikan Anda sudah punya method findById di KlienDao.java
+            Klien klien = klienDao.findById(selectedKlienId);
+
+            // 3. Pastikan data klien berhasil ditemukan
+            if (klien != null) {
+                // 4. Isi SEMUA field di form menggunakan data dari objek 'klien'
+                txtNama.setText(klien.getNamaLengkap());
+                txtEmail.setText(klien.getEmail());
+                txtLokasi.setText(klien.getLokasi());
+
+                // --- KODE TAMBAHAN UNTUK TELEPON DAN JUMLAH TAMU ---
+                txtTelepon.setText(klien.getNoTelepon());
+                spinnerTamu.setValue(klien.getJumlahTamu());
+                // ----------------------------------------------------
+
+                // Mengatur tanggal
+                if (klien.getTanggalPernikahan() != null) {
+                    LocalDate tanggal = klien.getTanggalPernikahan();
+                    dateChooserTanggal.setDate(Date.from(tanggal.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                } else {
+                    dateChooserTanggal.setDate(null);
+                }
+
+                // 5. Atur state tombol
+                btnSimpan.setEnabled(false);
+                btnUpdate.setEnabled(true);
+                btnHapus.setEnabled(true);
+            }
+        }
         
     }//GEN-LAST:event_tabelKlienMouseClicked
 
     private void tabelVendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelVendorMouseClicked
         // TODO add your handling code here:
         
-        int row = tabelVendor.getSelectedRow();
-        if (row != -1) {
-            selectedVendorId = (ObjectId) tabelVendor.getValueAt(row, 0);
-            // ... (kode untuk mengambil data vendor dari DB dan menampilkannya di form) ...
-            btnSimpanVendor.setEnabled(false);
-            btnUpdateVendor.setEnabled(true);
-            btnHapusVendor.setEnabled(true);
+         int selectedRow = tabelVendor.getSelectedRow();
+        if (selectedRow != -1) {
+            // 1. Ambil ID dari kolom pertama tabel
+            selectedVendorId = (ObjectId) tabelVendor.getValueAt(selectedRow, 0);
+
+            // 2. Gunakan ID tersebut untuk mengambil data LENGKAP dari database
+            //    Pastikan Anda sudah punya method findById di VendorDao.java
+            Vendor vendor = vendorDao.findById(selectedVendorId);
+
+            // 3. Pastikan data vendor berhasil ditemukan
+            if (vendor != null) {
+                // 4. Isi field di form menggunakan data dari objek 'vendor'
+                //    sesuai dengan variabel yang Anda sebutkan.
+                txtNamaVendor.setText(vendor.getNamaVendor());
+                txtTeleponVendor.setText(vendor.getNoTelepon());
+                txtEmailVendor.setText(vendor.getEmail());
+                txtAreaDeskripsi.setText(vendor.getDeskripsiPaket());
+
+                // 5. Atur state tombol
+                btnSimpanVendor.setEnabled(false);
+                btnUpdateVendor.setEnabled(true);
+                btnHapusVendor.setEnabled(true);
+            }
         }
         
     }//GEN-LAST:event_tabelVendorMouseClicked
@@ -952,6 +1082,41 @@ public class MainView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnTandaiSelesaiActionPerformed
 
+    private void tabelTugasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelTugasMouseClicked
+        // TODO add your handling code here:
+        // Mengambil nomor baris yang sedang dipilih
+        int selectedRow = tabelTugas.getSelectedRow();
+
+        // Memastikan ada baris yang benar-benar dipilih (bukan klik di area kosong)
+        if (selectedRow != -1) {
+            // 1. Ambil ID tugas dari kolom pertama (indeks 0) tabel
+            //    Pastikan kolom ID ini ada di model tabel Anda, meskipun disembunyikan.
+            selectedTugasId = (ObjectId) tabelTugas.getValueAt(selectedRow, 0);
+
+            // 2. Aktifkan tombol Hapus dan Tandai Selesai
+            btnHapusTugas.setEnabled(true);
+            btnTandaiSelesai.setEnabled(true);
+        }
+    }//GEN-LAST:event_tabelTugasMouseClicked
+
+    private void comboKlienTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboKlienTugasActionPerformed
+        // TODO add your handling code here:
+        
+        // 1. Ambil item yang sedang dipilih dari ComboBox.
+        //    Item ini adalah objek KlienComboBoxItem yang menyimpan ID dan Nama.
+        KlienComboBoxItem selectedItem = (KlienComboBoxItem) comboKlienTugas.getSelectedItem();
+
+        // 2. Periksa apakah ada item yang dipilih.
+        if (selectedItem != null) {
+            // Jika ada, panggil method loadTugasData dengan ID klien yang dipilih.
+            loadTugasData(selectedItem.getId());
+        } else {
+            // Jika tidak ada (misalnya saat daftar klien kosong),
+            // panggil dengan null agar tabel dikosongkan.
+            loadTugasData(null);
+        }
+    }//GEN-LAST:event_comboKlienTugasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1005,11 +1170,14 @@ public class MainView extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dateChooserTanggal;
     private com.toedter.calendar.JDateChooser dateTenggatWaktu;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
