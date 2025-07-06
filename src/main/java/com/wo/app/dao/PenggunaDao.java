@@ -24,12 +24,7 @@ public class PenggunaDao {
         this.collection = DatabaseManager.getInstance().getDatabase().getCollection("pengguna");
     }
 
-    /**
-     * Mengubah objek Document dari MongoDB menjadi objek Pengguna.
-     *
-     * @param doc Document yang akan diubah.
-     * @return Objek Pengguna.
-     */
+
     private Pengguna documentToPengguna(Document doc) {
         if (doc == null) {
             return null;
@@ -52,14 +47,7 @@ public class PenggunaDao {
         return documentToPengguna(doc);
     }
 
-    /**
-     * Membuat pengguna baru dan menyimpannya ke database. Method ini secara
-     * otomatis akan melakukan hashing password.
-     *
-     * @param username Username pengguna baru.
-     * @param plainPassword Password asli (belum di-hash).
-     * @return true jika berhasil dibuat, false jika username sudah ada.
-     */
+ 
     public boolean create(String username, String plainPassword) {
         // Cek dulu apakah username sudah ada
         if (findByUsername(username) != null) {
@@ -86,12 +74,11 @@ public class PenggunaDao {
         System.out.println("Mencoba membuat pengguna admin awal...");
         PenggunaDao dao = new PenggunaDao();
 
-        // Ganti "admin" dan "12345" jika Anda ingin username & password yang berbeda
+        // untuk menambah username & password lewat kode
         dao.create("admin", "12345");
 
         System.out.println("Proses selesai. Cek output di atas.");
-        // Anda bisa menutup aplikasi setelah ini dijalankan.
-        // Tambahkan System.exit(0) agar program berhenti setelah selesai.
+        // System.exit(0) agar program berhenti setelah selesai.
         System.exit(0);
     }
 }

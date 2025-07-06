@@ -17,9 +17,7 @@ public class SoundPlayer {
 
     public static void playNotificationSound() {
         try {
-            // Mencari file suara dari folder resources.
-            // Cara ini lebih baik daripada menggunakan new File() agar berfungsi
-            // saat aplikasi sudah di-package menjadi file .jar.
+
             URL soundUrl = SoundPlayer.class.getResource("/notification.wav");
             if (soundUrl == null) {
                 System.err.println("File suara 'notification.wav' tidak ditemukan di resources!");
@@ -31,7 +29,6 @@ public class SoundPlayer {
             clip.open(audioIn);
             clip.start();
         } catch (Exception e) {
-            // Cetak error jika gagal memainkan suara, tapi jangan hentikan aplikasi.
             System.err.println("Gagal memainkan suara notifikasi: " + e.getMessage());
             e.printStackTrace();
         }

@@ -75,15 +75,8 @@ public class KlienDao {
         }
         return klienList;
     }
-
-    // ==========================================================
-    // == KODE TAMBAHAN ADA DI SINI ==
-    // ==========================================================
-    /**
-     * Mencari satu klien di database berdasarkan ID uniknya.
-     * @param id ObjectId dari klien yang akan dicari.
-     * @return Objek Klien jika ditemukan, null jika tidak.
-     */
+    
+    
     public Klien findById(ObjectId id) {
         // Membuat filter untuk mencari dokumen dengan _id yang cocok
         Bson filter = Filters.eq("_id", id);
@@ -94,10 +87,8 @@ public class KlienDao {
         // Mengubah dokumen menjadi objek Klien dan mengembalikannya
         return documentToKlien(doc);
     }
-    // ==========================================================
-    // == AKHIR DARI KODE TAMBAHAN ==
-    // ==========================================================
-
+   
+    
     // UPDATE
     public boolean update(Klien klien) {
         if (klien.getId() == null) {

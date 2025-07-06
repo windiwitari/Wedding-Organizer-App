@@ -15,11 +15,9 @@ public class Vendor {
 
     private ObjectId id;
     private String namaVendor;
-    private String kategori; // Misal: Katering, Fotografi, Dekorasi, dll.
-    private String kontakPerson;
     private String noTelepon;
     private String email;
-    private String deskripsiPaket; // Untuk deskripsi dan harga
+    private String deskripsiPaket; 
 
 
     // Getters and Setters
@@ -37,22 +35,6 @@ public class Vendor {
 
     public void setNamaVendor(String namaVendor) {
         this.namaVendor = namaVendor;
-    }
-
-    public String getKategori() {
-        return kategori;
-    }
-
-    public void setKategori(String kategori) {
-        this.kategori = kategori;
-    }
-
-    public String getKontakPerson() {
-        return kontakPerson;
-    }
-
-    public void setKontakPerson(String kontakPerson) {
-        this.kontakPerson = kontakPerson;
     }
 
     public String getNoTelepon() {

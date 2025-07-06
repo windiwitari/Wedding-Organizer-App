@@ -49,7 +49,7 @@ public class MainView extends javax.swing.JFrame {
 
         @Override
         public String toString() {
-            return nama; // Teks ini yang akan ditampilkan di ComboBox
+            return nama; 
         }
     }
     
@@ -75,7 +75,7 @@ public class MainView extends javax.swing.JFrame {
     }
     
      // =========================================================================
-    // == BAGIAN KODE UNTUK MANAJEMEN KLIEN
+    // MANAJEMEN KLIEN
     // =========================================================================
     
 
@@ -85,17 +85,15 @@ public class MainView extends javax.swing.JFrame {
 
         List<Klien> klienList = klienDao.findAll();
         for (Klien klien : klienList) {
-            // INI BAGIAN YANG DIPERBAIKI:
-            // Sekarang kita memasukkan semua data ke dalam setiap baris
-            // sesuai urutan kolom di tabel Anda.
+
             model.addRow(new Object[]{
-                klien.getId(),              // Kolom 0 (disembunyikan)
-                klien.getNamaLengkap(),     // Kolom 1 (Nama)
-                klien.getNoTelepon(),       // Kolom 2 (Telepon)
-                klien.getEmail(),           // Kolom 3 (Email)
-                klien.getLokasi(),          // Kolom 4 (Lokasi)
-                klien.getJumlahTamu(),      // Kolom 5 (Jumlah Tamu)
-                klien.getTanggalPernikahan()// Kolom 6 (Tanggal)
+                klien.getId(),              
+                klien.getNamaLengkap(),     
+                klien.getNoTelepon(),       
+                klien.getEmail(),           
+                klien.getLokasi(),          
+                klien.getJumlahTamu(),     
+                klien.getTanggalPernikahan()
             });
         }
         
@@ -123,17 +121,16 @@ public class MainView extends javax.swing.JFrame {
     }
     
      // =========================================================================
-    // == BAGIAN KODE UNTUK MANAJEMEN VENDOR
+    //  MANAJEMEN VENDOR
     // =========================================================================
 
      private void loadVendorData() {
         DefaultTableModel model = (DefaultTableModel) tabelVendor.getModel();
-        model.setRowCount(0); // Kosongkan tabel sebelum diisi
+        model.setRowCount(0); 
 
         List<Vendor> vendorList = vendorDao.findAll();
         for (Vendor vendor : vendorList) {
-            // INI BAGIAN YANG DIPERBAIKI:
-            // Sekarang kita memasukkan semua data ke dalam setiap baris.
+
             model.addRow(new Object[]{
                 vendor.getId(),             // Kolom 0 (disembunyikan)
                 vendor.getNamaVendor(),     // Kolom 1 (Nama Vendor)
@@ -166,7 +163,7 @@ public class MainView extends javax.swing.JFrame {
     
    
     // =========================================================================
-    // BAGIAN KODE UNTUK MANAJEMEN TUGAS
+    // MANAJEMEN TUGAS
     // =========================================================================
     
     private void populateKlienComboBox() {
@@ -179,21 +176,22 @@ public class MainView extends javax.swing.JFrame {
 
     private void loadTugasData(ObjectId clientId) {
         DefaultTableModel model = (DefaultTableModel) tabelTugas.getModel();
-        model.setRowCount(0); // Selalu kosongkan tabel terlebih dahulu
+        model.setRowCount(0); 
 
-        // Hanya jalankan pencarian jika clientId tidak null
+        
         if (clientId != null) {
+            
             // Panggil DAO untuk mencari semua tugas yang memiliki 'idKlien' yang cocok
             List<Tugas> tugasList = tugasDao.findByClientId(clientId);
             
-            // Masukkan setiap tugas yang ditemukan sebagai baris baru di tabel
+           
             for (Tugas tugas : tugasList) {
                 model.addRow(new Object[]{
-                    tugas.getId(),              // Kolom 0 (disembunyikan)
-                    tugas.getNamaTugas(),       // Kolom 1
-                    tugas.getTenggatWaktu(),    // Kolom 2
-                    tugas.getStatus(),          // Kolom 3
-                    tugas.getPenanggungJawab()  // Kolom 4
+                    tugas.getId(),              
+                    tugas.getNamaTugas(),       
+                    tugas.getTenggatWaktu(),   
+                    tugas.getStatus(),          
+                    tugas.getPenanggungJawab()  
                 });
             }
         }
@@ -359,14 +357,14 @@ public class MainView extends javax.swing.JFrame {
         KlienLayout.setHorizontalGroup(
             KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, KlienLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, KlienLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(492, 492, 492))
+                        .addGap(571, 571, 571))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, KlienLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))))
+                        .addComponent(jLabel10)
+                        .addGap(403, 403, 403))))
             .addGroup(KlienLayout.createSequentialGroup()
                 .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(KlienLayout.createSequentialGroup()
@@ -377,74 +375,85 @@ public class MainView extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, KlienLayout.createSequentialGroup()
                                     .addComponent(jLabel1)
-                                    .addGap(98, 98, 98)))
-                            .addGroup(KlienLayout.createSequentialGroup()
-                                .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel4))
-                                .addGap(17, 17, 17))))
+                                    .addGap(40, 40, 40)))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4))
+                        .addGap(185, 185, 185)
+                        .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLokasi, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spinnerTamu, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateChooserTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(KlienLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(208, 208, 208)
                         .addComponent(btnUpdate)
-                        .addGap(35, 35, 35)))
-                .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(KlienLayout.createSequentialGroup()
-                            .addComponent(btnSimpan)
-                            .addGap(26, 26, 26)
-                            .addComponent(btnHapus)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnBaru))
-                        .addComponent(dateChooserTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-                        .addComponent(spinnerTamu)
-                        .addComponent(txtLokasi)
-                        .addComponent(txtEmail)
-                        .addComponent(txtTelepon)
-                        .addComponent(txtNama)))
+                        .addGap(74, 74, 74)
+                        .addComponent(btnSimpan)
+                        .addGap(57, 57, 57)
+                        .addComponent(btnHapus)
+                        .addGap(71, 71, 71)
+                        .addComponent(btnBaru)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(KlienLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 55, Short.MAX_VALUE))
         );
         KlienLayout.setVerticalGroup(
             KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, KlienLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel10)
-                .addGap(42, 42, 42)
+                .addGap(44, 44, 44)
                 .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addGroup(KlienLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, KlienLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(txtLokasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(spinnerTamu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dateChooserTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(KlienLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel4))
+                    .addGroup(KlienLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtLokasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(KlienLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel6))
+                    .addGroup(KlienLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(spinnerTamu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(KlienLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel5))
+                    .addGroup(KlienLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(dateChooserTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(63, 63, 63)
+                .addGroup(KlienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdate)
                     .addComponent(btnSimpan)
-                    .addComponent(btnBaru)
                     .addComponent(btnHapus)
-                    .addComponent(btnUpdate))
-                .addGap(36, 36, 36)
+                    .addComponent(btnBaru))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGap(13, 13, 13)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Manajemen Klien", Klien);
@@ -518,16 +527,22 @@ public class MainView extends javax.swing.JFrame {
         VendorLayout.setHorizontalGroup(
             VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VendorLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VendorLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(492, 492, 492))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VendorLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))))
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
             .addGroup(VendorLayout.createSequentialGroup()
                 .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VendorLayout.createSequentialGroup()
+                        .addGap(261, 261, 261)
+                        .addComponent(btnUpdateVendor)
+                        .addGap(59, 59, 59)
+                        .addComponent(btnSimpanVendor)
+                        .addGap(59, 59, 59)
+                        .addComponent(btnHapusVendor)
+                        .addGap(56, 56, 56)
+                        .addComponent(btnBaru1))
                     .addGroup(VendorLayout.createSequentialGroup()
                         .addGap(79, 79, 79)
                         .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -536,63 +551,54 @@ public class MainView extends javax.swing.JFrame {
                                 .addComponent(jLabel8)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VendorLayout.createSequentialGroup()
                                     .addComponent(jLabel12)
-                                    .addGap(98, 98, 98)))
-                            .addGroup(VendorLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(100, 100, 100))))
+                                    .addGap(28, 28, 28)))
+                            .addComponent(jLabel9))
+                        .addGap(206, 206, 206)
+                        .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNamaVendor, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                            .addComponent(txtTeleponVendor)
+                            .addComponent(txtEmailVendor)
+                            .addComponent(txtAreaDeskripsi)))
                     .addGroup(VendorLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUpdateVendor)
-                        .addGap(35, 35, 35)))
-                .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(VendorLayout.createSequentialGroup()
-                        .addComponent(btnSimpanVendor)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnHapusVendor)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBaru1))
-                    .addComponent(txtAreaDeskripsi, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-                    .addComponent(txtEmailVendor)
-                    .addComponent(txtTeleponVendor)
-                    .addComponent(txtNamaVendor))
+                        .addGap(378, 378, 378)
+                        .addComponent(jLabel11)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(VendorLayout.createSequentialGroup()
-                .addGap(245, 245, 245)
-                .addComponent(jLabel11)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         VendorLayout.setVerticalGroup(
             VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VendorLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel11)
-                .addGap(41, 41, 41)
+                .addGap(42, 42, 42)
                 .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txtNamaVendor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtTeleponVendor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEmailVendor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(txtTeleponVendor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
-                .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtEmailVendor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtAreaDeskripsi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdateVendor)
                     .addComponent(btnSimpanVendor)
-                    .addComponent(btnBaru1)
                     .addComponent(btnHapusVendor)
-                    .addComponent(btnUpdateVendor))
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                    .addComponent(btnBaru1))
+                .addGroup(VendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VendorLayout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VendorLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
         );
 
         jTabbedPane1.addTab("Manajemen Vendor", Vendor);
@@ -674,45 +680,54 @@ public class MainView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
-                                    .addComponent(jLabel15)
-                                    .addComponent(btnSimpanTugas))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(btnHapusTugas)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                                        .addComponent(btnTandaiSelesai))
-                                    .addComponent(txtNamaTugas)
+                                    .addComponent(jLabel15))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtPenanggungJawab)
-                                    .addComponent(dateTenggatWaktu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(dateTenggatWaktu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                                    .addComponent(txtNamaTugas, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(137, 137, 137))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel17)
-                                    .addComponent(comboKlienTugas, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(comboKlienTugas, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnSimpanTugas)
+                                .addGap(57, 57, 57)
+                                .addComponent(btnHapusTugas)
+                                .addGap(63, 63, 63)
+                                .addComponent(btnTandaiSelesai)
+                                .addGap(148, 148, 148)))
                         .addGap(74, 74, 74))))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(386, 386, 386)
+                .addComponent(jLabel17)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(38, 38, 38)
                 .addComponent(jLabel17)
-                .addGap(36, 36, 36)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(comboKlienTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtNamaTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNamaTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel15)
                     .addComponent(dateTenggatWaktu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -725,7 +740,7 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(btnSimpanTugas)
                     .addComponent(btnHapusTugas)
                     .addComponent(btnTandaiSelesai))
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Manajemen Tugas", jPanel4);
@@ -750,27 +765,27 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnSimpanTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanTugasActionPerformed
         // TODO add your handling code here:
-        // 1. Periksa apakah klien sudah dipilih di ComboBox
+        
         KlienComboBoxItem selectedKlien = (KlienComboBoxItem) comboKlienTugas.getSelectedItem();
         if (selectedKlien == null) {
             JOptionPane.showMessageDialog(this, "Pilih klien terlebih dahulu untuk menambahkan tugas!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // 2. Validasi input (pastikan nama tugas tidak kosong)
+        
         if (txtNamaTugas.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Nama Tugas tidak boleh kosong!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        // 3. Buat objek Tugas baru
+        
         Tugas tugas = new Tugas();
         
-        // 4. Isi data dari form ke objek
-        tugas.setIdKlien(selectedKlien.getId()); // Hubungkan tugas dengan klien
+        // Isi data dari form ke objek
+        tugas.setIdKlien(selectedKlien.getId()); 
         tugas.setNamaTugas(txtNamaTugas.getText());
         tugas.setPenanggungJawab(txtPenanggungJawab.getText());
-        tugas.setStatus("Belum Dikerjakan"); // Status default untuk tugas baru
+        tugas.setStatus("Belum Dikerjakan"); 
 
         if (dateTenggatWaktu.getDate() != null) {
             tugas.setTenggatWaktu(dateTenggatWaktu.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
@@ -778,13 +793,13 @@ public class MainView extends javax.swing.JFrame {
             tugas.setTenggatWaktu(LocalDate.now().plusDays(7)); // Default tenggat 7 hari jika kosong
         }
         
-        // 5. Panggil DAO untuk menyimpan ke database
+        // Panggil DAO untuk menyimpan ke database
         tugasDao.create(tugas);
         
-        // 6. Beri umpan balik dan refresh tampilan
+        // Beri umpan balik dan refresh tampilan
         JOptionPane.showMessageDialog(this, "Tugas baru berhasil disimpan!");
-        loadTugasData(selectedKlien.getId()); // Refresh tabel tugas
-        resetFormTugas(); // Kosongkan form input tugas
+        loadTugasData(selectedKlien.getId()); 
+        resetFormTugas(); 
     }//GEN-LAST:event_btnSimpanTugasActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
@@ -810,10 +825,10 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnSimpanVendorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanVendorActionPerformed
         // TODO add your handling code here:
-   // Langkah 2: Buat objek Vendor baru untuk diisi data
+   
         Vendor vendor = new Vendor();
         
-        // Langkah 3: Ambil semua data dari form dan masukkan ke objek
+        // data dari form dan masukkan ke objek
         vendor.setNamaVendor(txtNamaVendor.getText());
         vendor.setNoTelepon(txtTeleponVendor.getText());
         vendor.setEmail(txtEmailVendor.getText());
@@ -821,13 +836,13 @@ public class MainView extends javax.swing.JFrame {
         
         
         
-        // Langkah 4: Panggil DAO untuk menyimpan objek ke database MongoDB
+        
         vendorDao.create(vendor);
         
-        // Langkah 5: Tampilkan pesan bahwa penyimpanan berhasil
+        
         JOptionPane.showMessageDialog(this, "Data vendor berhasil disimpan!");
         
-        // Langkah 6: Refresh data di tabel agar data baru muncul
+       
         loadVendorData();
         resetFormVendor();    
         
@@ -837,26 +852,21 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
      int selectedRow = tabelKlien.getSelectedRow();
         if (selectedRow != -1) {
-            // 1. Ambil ID dari kolom pertama tabel
+            // Ambil ID dari kolom pertama tabel
             selectedKlienId = (ObjectId) tabelKlien.getValueAt(selectedRow, 0);
 
-            // 2. Gunakan ID untuk mengambil data LENGKAP klien dari database
-            //    Pastikan Anda sudah punya method findById di KlienDao.java
+            
             Klien klien = klienDao.findById(selectedKlienId);
-
-            // 3. Pastikan data klien berhasil ditemukan
             if (klien != null) {
-                // 4. Isi SEMUA field di form menggunakan data dari objek 'klien'
+                // Isi SEMUA field di form menggunakan data dari objek 'klien'
                 txtNama.setText(klien.getNamaLengkap());
                 txtEmail.setText(klien.getEmail());
                 txtLokasi.setText(klien.getLokasi());
-
-                // --- KODE TAMBAHAN UNTUK TELEPON DAN JUMLAH TAMU ---
                 txtTelepon.setText(klien.getNoTelepon());
                 spinnerTamu.setValue(klien.getJumlahTamu());
-                // ----------------------------------------------------
 
-                // Mengatur tanggal
+
+
                 if (klien.getTanggalPernikahan() != null) {
                     LocalDate tanggal = klien.getTanggalPernikahan();
                     dateChooserTanggal.setDate(Date.from(tanggal.atStartOfDay(ZoneId.systemDefault()).toInstant()));
@@ -864,7 +874,6 @@ public class MainView extends javax.swing.JFrame {
                     dateChooserTanggal.setDate(null);
                 }
 
-                // 5. Atur state tombol
                 btnSimpan.setEnabled(false);
                 btnUpdate.setEnabled(true);
                 btnHapus.setEnabled(true);
@@ -878,23 +887,17 @@ public class MainView extends javax.swing.JFrame {
         
          int selectedRow = tabelVendor.getSelectedRow();
         if (selectedRow != -1) {
-            // 1. Ambil ID dari kolom pertama tabel
+            
             selectedVendorId = (ObjectId) tabelVendor.getValueAt(selectedRow, 0);
 
-            // 2. Gunakan ID tersebut untuk mengambil data LENGKAP dari database
-            //    Pastikan Anda sudah punya method findById di VendorDao.java
             Vendor vendor = vendorDao.findById(selectedVendorId);
-
-            // 3. Pastikan data vendor berhasil ditemukan
             if (vendor != null) {
-                // 4. Isi field di form menggunakan data dari objek 'vendor'
-                //    sesuai dengan variabel yang Anda sebutkan.
+     
                 txtNamaVendor.setText(vendor.getNamaVendor());
                 txtTeleponVendor.setText(vendor.getNoTelepon());
                 txtEmailVendor.setText(vendor.getEmail());
                 txtAreaDeskripsi.setText(vendor.getDeskripsiPaket());
 
-                // 5. Atur state tombol
                 btnSimpanVendor.setEnabled(false);
                 btnUpdateVendor.setEnabled(true);
                 btnHapusVendor.setEnabled(true);
@@ -910,26 +913,26 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // TODO add your handling code here:
-        // 1. Periksa apakah ada klien yang dipilih dari tabel
+
         if (selectedKlienId == null) {
             JOptionPane.showMessageDialog(this, "Pilih data klien yang akan dihapus!", "Error", JOptionPane.ERROR_MESSAGE);
-            return; // Hentikan proses jika tidak ada yang dipilih
+            return; 
         }
 
-        // 2. Tampilkan dialog konfirmasi
+       
         int response = JOptionPane.showConfirmDialog(this,
                 "Anda yakin ingin menghapus data klien ini? Semua tugas yang terkait juga akan tetap ada.", "Konfirmasi Hapus",
                 JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
-        // 3. Jika pengguna menekan "YES"
+        
         if (response == JOptionPane.YES_OPTION) {
-            // 4. Panggil DAO untuk menghapus data dari database
+            // Panggil DAO untuk menghapus data dari database
             if (klienDao.delete(selectedKlienId)) {
                 // Jika berhasil
                 JOptionPane.showMessageDialog(this, "Data klien berhasil dihapus!");
-                loadKlienData();       // Refresh tabel klien
-                populateKlienComboBox(); // Refresh combobox di tab tugas
-                resetForm();           // Kosongkan form
+                loadKlienData();       
+                populateKlienComboBox(); 
+                resetForm();          
             } else {
                 // Jika gagal
                 JOptionPane.showMessageDialog(this, "Gagal menghapus data!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -939,22 +942,20 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnHapusVendorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusVendorActionPerformed
         // TODO add your handling code here:
-        // 1. Periksa apakah ada vendor yang dipilih dari tabel
+   
         if (selectedVendorId == null) {
             JOptionPane.showMessageDialog(this, "Pilih data vendor yang akan dihapus!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // 2. Tampilkan dialog konfirmasi
         int response = JOptionPane.showConfirmDialog(this, "Anda yakin ingin menghapus data vendor ini?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
         
-        // 3. Jika pengguna menekan "YES"
+
         if (response == JOptionPane.YES_OPTION) {
-            // 4. Panggil DAO untuk menghapus
             if (vendorDao.delete(selectedVendorId)) {
                 JOptionPane.showMessageDialog(this, "Data vendor berhasil dihapus!");
-                loadVendorData();    // Refresh tabel vendor
-                resetFormVendor();   // Kosongkan form vendor
+                loadVendorData();    
+                resetFormVendor();  
             } else {
                 JOptionPane.showMessageDialog(this, "Gagal menghapus data vendor!", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -963,21 +964,18 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnHapusTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusTugasActionPerformed
         // TODO add your handling code here:
-        // 1. Periksa apakah ada tugas yang dipilih dari tabel
+      
         if (selectedTugasId == null) {
             JOptionPane.showMessageDialog(this, "Pilih data tugas yang akan dihapus!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        // 2. Tampilkan dialog konfirmasi
+
         int response = JOptionPane.showConfirmDialog(this, "Anda yakin ingin menghapus tugas ini?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
 
-        // 3. Jika pengguna menekan "YES"
         if (response == JOptionPane.YES_OPTION) {
-            // 4. Panggil DAO untuk menghapus
             if (tugasDao.delete(selectedTugasId)) {
                 JOptionPane.showMessageDialog(this, "Tugas berhasil dihapus!");
-                
+
                 // Refresh tabel tugas sesuai klien yang sedang dipilih
                 KlienComboBoxItem selectedKlien = (KlienComboBoxItem) comboKlienTugas.getSelectedItem();
                 if (selectedKlien != null) {
@@ -992,15 +990,15 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        //1. Periksa apakah ada klien yang dipilih dari tabel
+        
         if (selectedKlienId == null) {
             JOptionPane.showMessageDialog(this, "Pilih data klien yang akan diupdate!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        // 2. Buat objek Klien dan isi dengan data dari form
+        // Buat objek Klien dan isi dengan data dari form
         Klien klien = new Klien();
-        klien.setId(selectedKlienId); // PENTING: Set ID agar DAO tahu mana yang diupdate
+        klien.setId(selectedKlienId); // Set ID agar DAO tahu mana yang diupdate
         klien.setNamaLengkap(txtNama.getText());
         klien.setEmail(txtEmail.getText());
         klien.setNoTelepon(txtTelepon.getText());
@@ -1010,12 +1008,12 @@ public class MainView extends javax.swing.JFrame {
             klien.setTanggalPernikahan(dateChooserTanggal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         }
 
-        // 3. Panggil DAO untuk mengupdate data di database
+        // Panggil DAO untuk mengupdate data di database
         if (klienDao.update(klien)) {
             JOptionPane.showMessageDialog(this, "Data klien berhasil diupdate!");
-            loadKlienData();       // Refresh tabel
-            populateKlienComboBox(); // Refresh combobox di tab tugas
-            resetForm();           // Kosongkan form
+            loadKlienData();       
+            populateKlienComboBox(); 
+            resetForm();           
         } else {
             JOptionPane.showMessageDialog(this, "Gagal mengupdate data!", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1023,22 +1021,21 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnUpdateVendorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateVendorActionPerformed
         // TODO add your handling code here:
-        // 1. Periksa apakah ada vendor yang dipilih
+        
         if (selectedVendorId == null) {
             JOptionPane.showMessageDialog(this, "Pilih vendor yang akan diupdate!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // 2. Buat objek Vendor dan isi dengan data dari form
+        // Buat objek Vendor dan isi dengan data dari form
         Vendor vendor = new Vendor();
         vendor.setId(selectedVendorId); // PENTING: Set ID vendor yang akan diupdate
         vendor.setNamaVendor(txtNamaVendor.getText());
         vendor.setNoTelepon(txtTeleponVendor.getText());
         vendor.setEmail(txtEmailVendor.getText());
         vendor.setDeskripsiPaket(txtAreaDeskripsi.getText());
-        // Jika Anda menambahkan JDateChooser ke tab Vendor, tambahkan logikanya di sini
+     
 
-        // 3. Panggil DAO untuk update
         if (vendorDao.update(vendor)) {
             JOptionPane.showMessageDialog(this, "Data vendor berhasil diupdate!");
             loadVendorData();
@@ -1055,28 +1052,28 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnTandaiSelesaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTandaiSelesaiActionPerformed
         // TODO add your handling code here:
-        // 1. Periksa apakah ada tugas yang dipilih dari tabel
+
         if (selectedTugasId == null) {
             JOptionPane.showMessageDialog(this, "Pilih tugas yang akan ditandai selesai!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // 2. Panggil DAO untuk mengupdate status tugas menjadi "Selesai"
+        //Panggil DAO untuk mengupdate status tugas menjadi "Selesai"
         if (tugasDao.updateStatus(selectedTugasId, "Selesai")) {
-            // Jika berhasil diupdate
+            
             // Panggil method dari kelas SoundPlayer (Fitur Multimedia)
             com.wo.app.util.SoundPlayer.playNotificationSound();
             
             JOptionPane.showMessageDialog(this, "Tugas ditandai selesai!");
 
-            // 3. Refresh tabel untuk menampilkan status yang baru
+            //Refresh tabel untuk menampilkan status yang baru
             KlienComboBoxItem selectedKlien = (KlienComboBoxItem) comboKlienTugas.getSelectedItem();
             if (selectedKlien != null) {
                 loadTugasData(selectedKlien.getId());
             }
             resetFormTugas(); // Reset form dan state tombol
         } else {
-            // Jika gagal
+            
             JOptionPane.showMessageDialog(this, "Gagal mengupdate status tugas!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -1089,11 +1086,11 @@ public class MainView extends javax.swing.JFrame {
 
         // Memastikan ada baris yang benar-benar dipilih (bukan klik di area kosong)
         if (selectedRow != -1) {
-            // 1. Ambil ID tugas dari kolom pertama (indeks 0) tabel
-            //    Pastikan kolom ID ini ada di model tabel Anda, meskipun disembunyikan.
+            // Ambil ID tugas dari kolom pertama (indeks 0) tabel
+            // Pastikan kolom ID ini ada di model tabel Anda, meskipun disembunyikan.
             selectedTugasId = (ObjectId) tabelTugas.getValueAt(selectedRow, 0);
 
-            // 2. Aktifkan tombol Hapus dan Tandai Selesai
+            //Aktifkan tombol Hapus dan Tandai Selesai
             btnHapusTugas.setEnabled(true);
             btnTandaiSelesai.setEnabled(true);
         }
@@ -1102,11 +1099,11 @@ public class MainView extends javax.swing.JFrame {
     private void comboKlienTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboKlienTugasActionPerformed
         // TODO add your handling code here:
         
-        // 1. Ambil item yang sedang dipilih dari ComboBox.
-        //    Item ini adalah objek KlienComboBoxItem yang menyimpan ID dan Nama.
+        //  Ambil item yang sedang dipilih dari ComboBox.
+        //  Item ini adalah objek KlienComboBoxItem yang menyimpan ID dan Nama.
         KlienComboBoxItem selectedItem = (KlienComboBoxItem) comboKlienTugas.getSelectedItem();
 
-        // 2. Periksa apakah ada item yang dipilih.
+        // Periksa apakah ada item yang dipilih.
         if (selectedItem != null) {
             // Jika ada, panggil method loadTugasData dengan ID klien yang dipilih.
             loadTugasData(selectedItem.getId());

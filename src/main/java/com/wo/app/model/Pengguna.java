@@ -13,7 +13,7 @@ public class Pengguna {
     private String passwordHash; // Hash dari password
     private String salt;         // Salt untuk hashing
 
-    // Getters and Setters
+
     public String getUsername() {
         return username;
     }

@@ -56,21 +56,12 @@ public class TugasDao {
         return tugas;
     }
 
-    /**
-     * Membuat tugas baru di database.
-     *
-     * @param tugas Objek Tugas yang akan disimpan.
-     */
+
     public void create(Tugas tugas) {
         collection.insertOne(tugasToDocument(tugas));
     }
 
-    /**
-     * Method khusus untuk mencari semua tugas berdasarkan ID Klien.
-     *
-     * @param clientId ID dari klien yang tugasnya ingin dicari.
-     * @return Sebuah List berisi objek Tugas milik klien tersebut.
-     */
+
     public List<Tugas> findByClientId(ObjectId clientId) {
         List<Tugas> tugasList = new ArrayList<>();
         Bson filter = Filters.eq("idKlien", clientId);
@@ -82,25 +73,14 @@ public class TugasDao {
         return tugasList;
     }
 
-    /**
-     * Method khusus untuk mengupdate status sebuah tugas (lebih efisien).
-     *
-     * @param tugasId ID dari tugas yang akan diupdate.
-     * @param newStatus Status baru (misal: "Selesai").
-     * @return true jika berhasil diupdate.
-     */
+
     public boolean updateStatus(ObjectId tugasId, String newStatus) {
         Bson filter = Filters.eq("_id", tugasId);
         Bson update = Updates.set("status", newStatus);
         return collection.updateOne(filter, update).getModifiedCount() > 0;
     }
 
-    /**
-     * Menghapus sebuah tugas dari database berdasarkan ID-nya.
-     *
-     * @param id ID dari tugas yang akan dihapus.
-     * @return true jika berhasil dihapus.
-     */
+
     public boolean delete(ObjectId id) {
         DeleteResult result = collection.deleteOne(Filters.eq("_id", id));
         return result.getDeletedCount() > 0;

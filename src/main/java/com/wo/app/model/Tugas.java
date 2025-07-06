@@ -17,10 +17,9 @@ public class Tugas {
     private ObjectId idKlien; // Kunci untuk menghubungkan ke collection Klien
     private String namaTugas;
     private LocalDate tenggatWaktu;
-    private String status; // Misal: "Belum Dikerjakan", "Dalam Proses", "Selesai"
+    private String status; 
     private String penanggungJawab;
 
-    // Getters and Setters untuk semua field di atas
     public ObjectId getId() {
         return id;
     }

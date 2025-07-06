@@ -20,7 +20,6 @@ public class VendorDao {
         this.collection = DatabaseManager.getInstance().getDatabase().getCollection("vendor");
     }
 
-    // Method ini sekarang hanya menyimpan field yang Anda minta
     private Document vendorToDocument(Vendor vendor) {
         Document doc = new Document("namaVendor", vendor.getNamaVendor())
                 .append("noTelepon", vendor.getNoTelepon())
@@ -29,7 +28,6 @@ public class VendorDao {
         return doc;
     }
 
-    // Method ini sekarang hanya mengambil field yang Anda minta
     private Vendor documentToVendor(Document doc) {
         if (doc == null) return null;
         Vendor vendor = new Vendor();
@@ -41,11 +39,7 @@ public class VendorDao {
         return vendor;
     }
 
-    /**
-     * Method PENTING untuk mengambil satu vendor berdasarkan ID.
-     * @param id ObjectId dari vendor yang akan dicari.
-     * @return Objek Vendor jika ditemukan, null jika tidak.
-     */
+
     public Vendor findById(ObjectId id) {
         Bson filter = Filters.eq("_id", id);
         Document doc = collection.find(filter).first();
